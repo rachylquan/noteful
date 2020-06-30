@@ -1,0 +1,53 @@
+.Note {
+  --note-height: 88px;
+  color: #777;
+  height: var(--note-height);
+  margin-bottom: 8px;
+  max-width: 380px;
+  padding: 8px;
+  position: relative;
+  border: 1px solid #777;
+}
+
+.Note__delete-btn {
+  --note-button-height: 32px;
+  background-color: #fff;
+  border: 0;
+  color: #777;
+  float: right;
+  font-size: 12px;
+  height: var(--note-button-height);
+  position: relative;
+  transform-origin: right bottom;
+  width: calc(var(--note-height));
+}
+.Note__delete-btn:hover {
+  background-color: #777;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all .23s ease-in-out;
+}
+
+.Note__name {
+  font-family: var(--custom-font);
+  font-size: 20px;
+  margin: 0;
+  max-width: 80%;
+  min-height: 24px;
+}
+.Note__name a {
+  color: #222;
+  display: block;
+  text-decoration: none;
+}
+.Note__name a:hover {
+  color: #FFB72F;
+}
+
+.Note__dates {
+  bottom: 8px;
+  color: #a7a5a5;
+  font-size: 14px;
+  position: absolute;
+}

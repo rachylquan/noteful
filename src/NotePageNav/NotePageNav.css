@@ -1,0 +1,22 @@
+.NotePageNav__back-btn {
+  margin: 45px 20px 25px auto;
+  border: 1px solid #FFB72F;
+  padding: 8px;
+  background-color: #fff;
+}
+.NotePageNav__back-btn:hover {
+  background-color: #FFB72F;
+  transition: all .23s ease-in-out;
+  cursor: pointer;
+}
+
+.NotePageNav__back-btn:hover h3 {
+  color: #fff;
+}
+
+.NotePageNav__folder-name {
+  font-family: var(--custom-font);
+  font-size: 40px;
+  margin: 0 0 0 auto;
+  color: #FFB72F;
+}

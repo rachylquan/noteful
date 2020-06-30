@@ -1,0 +1,63 @@
+.NoteListNav__list {
+  list-style-type: none;
+  margin: 130px 0 0;
+  padding: 0;
+}
+
+.NoteListNav__button-wrapper {
+  margin: 0 0 0 auto;
+  max-width: 180px;
+}
+
+.NoteListNav__add-folder-btn {
+  margin: 20px auto;
+  color: #FFB72F;
+  border: 1px solid #FFB72F;
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  background-color: #fff;
+}
+
+.NoteListNav__add-folder-btn a {
+  color: #FFB72F;
+  text-decoration: none;
+}
+
+.NoteListNav__add-folder-btn:hover {
+  background-color: #FFB72F;
+  transition: all .23s ease-in-out;
+}
+
+.NoteListNav__add-folder-btn:hover a {
+  color: white;
+  font-weight: bold;
+}
+
+.NoteListNav__folder-link {
+  color: #222;
+  display: block;
+  font-family: var(--custom-font);
+  font-size: 20px;
+  margin: 0 0 8px auto;
+  max-width: 180px;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.NoteListNav__folder-link:hover {
+  background-color: #FFB72F;
+  color: #fff;
+  transition: all .23s ease-in-out;
+  cursor: pointer;
+}
+.NoteListNav__folder-link.active {
+  background-color: #FFB72F;
+  color: #fff;
+}
+
+.NoteListNav__num-notes {
+  color: #adadad;
+  display: block;
+  float: right;
+  font-size: 10px;
+}
