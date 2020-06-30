@@ -1,22 +1,35 @@
-import React from 'react';
+import React, {Component} from 'react';
+import NotefulContext from '../NotefulContext';
+import { findNote, findFolder } from '../notes-helpers';
 import './NotePageNav.css';
 
-export default function NotePageNav(props) {
-  return (
-    <div className="NotePageNav">
-      <button type="button" className="NotePageNav__back-btn" onClick={() => props.history.goBack()}>
-        {props.folder && (
-          <h3 className="NotePageNav__folder-name">
-            {props.folder.name}
-          </h3>
-        )}
-      </button>
-    </div>
-  );
-}
-
-NotePageNav.defaultProps = {
-  history: {
-    goBack: () => {}
+export default class NotePageNav extends Component {
+  static defaultProps = {
+    history: {
+      goBack: () => { }
+    },
+    match: {
+      params: {}
+    }
   }
+
+  static contextType = NotefulContext;
+  render () {
+    const { notes, folders } = this.context;
+    const { noteId } = this.props.match.params;
+    const note = findNote(notes, noteId) || {};
+    const folder = findFolder(folders, note.folderId);
+    return (
+      <div className="NotePageNav">
+        <button type="button" className="NotePageNav__back-btn" onClick={() => this.props.history.goBack()}>
+          {folder && (
+            <h3 className="NotePageNav__folder-name">
+              {folder.name}
+            </h3>
+          )}
+        </button>
+      </div>
+    );
+  }
+  
 }
