@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
 import config from '../config';
 import './Note.css';
+import PropTypes from 'prop-types';
 
 export default class Note extends Component {
-  static defaultProps = {
-    onDeleteNote: () => {},
-  }
-
+  
   static contextType = NotefulContext;
 
   handleClickDelete = e => {
@@ -28,8 +26,8 @@ export default class Note extends Component {
       return res.json()
     })
     .then(() => {
-      this.context.deleteNote(noteId)
-      this.props.onDeleteNote(noteId)
+      console.log('note deleted')
+      this.context.deleteNote(noteId);
     })
     .catch(err => {
       console.log({err})
@@ -54,4 +52,11 @@ export default class Note extends Component {
       </div>
     );
   }
+}
+
+Note.propTypes = {
+  onDeleteNote: PropTypes.func,
+  id: PropTypes.string,
+  name: PropTypes.string,
+  modified: PropTypes.string
 }

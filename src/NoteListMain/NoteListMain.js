@@ -4,6 +4,7 @@ import Note from '../Note/Note';
 import { getNotesForFolder } from '../notes-helpers';
 import NotefulContext from '../NotefulContext'
 import './NoteListMain.css';
+import PropTypes from ' prop-types';
 
 export default class NoteListMain extends Component {
   static defaultProps = {
@@ -13,6 +14,7 @@ export default class NoteListMain extends Component {
   }
 
   static contextType = NotefulContext;
+
   render() {  
     const { folderId } = this.props.match.params;
     const { notes=[] } = this.context;
@@ -38,4 +40,8 @@ export default class NoteListMain extends Component {
       </section>
     );
   }
+}
+
+NoteListMain.propTypes = {
+  match: PropTypes.object
 }

@@ -3,6 +3,7 @@ import Note from '../Note/Note';
 import NotefulContext from '../NotefulContext';
 import { findNote } from '../notes-helpers';
 import './NotePageMain.css';
+import PropTypes from 'prop-types';
 
 export default class NotePageMain extends Component {
   static defaultProps = {
@@ -37,4 +38,9 @@ export default class NotePageMain extends Component {
       </section>
     );
   }
+}
+
+NotePageMain.propTypes = {
+  history: PropTypes.object,
+  match: PropTypes.object
 }
