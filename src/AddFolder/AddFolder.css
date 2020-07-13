@@ -1,0 +1,34 @@
+label, input, .submit__btn {
+  display: block;
+  margin-bottom: 10px;
+  width: 80%;
+}
+
+input {
+  padding: 10px;
+  border: 0;
+  border-bottom: 1px solid lightgrey;
+  transition: all 1s ease-in-out;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: 2px solid orange;
+  color: #000;
+}
+
+.submit__btn {
+  padding: 10px;
+  background-color: #fff;
+  color: orange;
+  font-weight: bolder;
+  border: 1px solid orange;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .25s ease-in-out;
+}
+
+.submit__btn:hover {
+  background-color: orange;
+  color: #fff;
+}

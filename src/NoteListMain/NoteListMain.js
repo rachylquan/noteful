@@ -4,7 +4,7 @@ import Note from '../Note/Note';
 import { getNotesForFolder } from '../notes-helpers';
 import NotefulContext from '../NotefulContext'
 import './NoteListMain.css';
-import PropTypes from ' prop-types';
+import PropTypes from 'prop-types';
 
 export default class NoteListMain extends Component {
   static defaultProps = {

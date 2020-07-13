@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NotefulContext from '../NotefulContext';
+import './AddNote.css';
 import config from '../config';
 
 export default class AddNote extends Component {
@@ -16,7 +17,6 @@ export default class AddNote extends Component {
       body: JSON.stringify(note),
     })
     .then(res => {
-      console.log(JSON.stringify(note))
       return res.json()
     })
     .then(resJSON => this.context.handleAddNote(resJSON))
@@ -68,6 +68,7 @@ export default class AddNote extends Component {
             id="name"
             aria-required="true"
             aria-label="Name"
+            placeholder="Name note"
             onChange={e => this.context.updateNewNoteData(e.target.name, e.target.value)}
           />
 
@@ -83,6 +84,7 @@ export default class AddNote extends Component {
             id="content"
             aria-required="true"
             aria-label="Description"
+            placeholder="Write note here."
             onChange={e => 
               this.context.updateNewNoteData(e.target.name, e.target.value)
             }
@@ -98,7 +100,7 @@ export default class AddNote extends Component {
             {this.parseFolders()}
           </select>
 
-          <button type="submit">Add</button>
+          <button className="submit__btn" type="submit">Add</button>
         </form>
       </>
     );

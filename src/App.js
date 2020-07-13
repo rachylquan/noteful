@@ -8,6 +8,7 @@ import NotePageMain from './NotePageMain/NotePageMain';
 import NotefulContext from './NotefulContext';
 import AddFolder from './AddFolder/AddFolder';
 import AddNote from './AddNote/AddNote';
+import NotefulError from './NotefulError/NotefulError';
 import config from './config';
 import './App.css';
 
@@ -81,14 +82,12 @@ class App extends Component {
   }
 
   handleAddFolder = newFolder => {
-    console.log('handling addFolder...');
     this.setState({
       folders: [...this.state.folders, newFolder],
     })
   }
 
   handleAddNote = note => {
-    console.log('handle addNote...')
     this.setState({
       notes: [...this.state.notes, note],
     })
@@ -137,7 +136,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.notes);
       const value = {
         notes: this.state.notes,
         folders: this.state.folders,
@@ -153,9 +151,11 @@ class App extends Component {
       return (
         <NotefulContext.Provider value={value}>
           <div className="App">
+            <NotefulError>
               <nav className="App__nav">{this.renderNavRoutes()}</nav>
               <Header />
               <main className="App__main">{this.renderMainRoutes()}</main>
+            </NotefulError>
           </div>
         </NotefulContext.Provider>
       );

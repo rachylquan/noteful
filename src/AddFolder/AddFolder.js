@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import config from '../config';
+import './AddFolder.css';
 import NotefulContext from '../NotefulContext';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 export default class AddFolder extends Component {
   static contextType = NotefulContext;
@@ -56,8 +57,9 @@ export default class AddFolder extends Component {
             aria-required="true"
             aria-label="Name"
             onChange= {(e) => this.updateFolderName(e)}
+            placeholder="folder name"
           />
-          <button type="submit">Add</button>
+          <button className="submit__btn" type="submit">Add</button>
         </form>
       </>
     )
