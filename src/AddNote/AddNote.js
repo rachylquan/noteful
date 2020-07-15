@@ -4,6 +4,23 @@ import './AddNote.css';
 import config from '../config';
 
 export default class AddNote extends Component {
+  state = {
+    newNote: {
+      name: {
+        touched: false,
+        value: ''
+      },
+      folderId: {
+        touched: false,
+        value: ''
+      },
+      content: {
+        touched: false,
+        value: '',
+      },
+    },
+  }
+  
   static contextType = NotefulContext;
 
   addNewNote = note => {
@@ -28,12 +45,12 @@ export default class AddNote extends Component {
     ))
   }
 
-  handleFormSubmit = e => {
-    e.preventDefault(e);
+  handleFormSubmit = event => {
+    event.preventDefault(event);
     const newNote = {
-      name: e.target.name.value,
-      content: e.target.content.value,
-      folderId: e.target.folders.value,
+      name: event.target.name.value,
+      content: event.target.content.value,
+      folderId: event.target.folders.value,
       modified: new Date(),
     }
     console.log(newNote);
@@ -41,14 +58,26 @@ export default class AddNote extends Component {
     this.props.history.push('/');
   }
 
+  updateNewNoteData = (name, value) => {
+    this.setState({
+      newNote: {
+        ...this.state.newNote,
+        [name]: {
+          touched: true,
+          value,
+        },
+      },
+    })
+  }
+
   validateName = () => {
-    if (this.context.newNote.name.value.length === 0) {
+    if (this.state.newNote.name.value.length === 0) {
       return 'Note is required'
     }
   }
 
   validateContent = () => {
-    if (this.context.newNote.content.value.length === 0) {
+    if (this.state.newNote.content.value.length === 0) {
       return 'Description is required'
     }
   }
@@ -60,7 +89,7 @@ export default class AddNote extends Component {
         <form className="addNote__form" onSubmit={e => this.handleFormSubmit(e)}>
           <label htmlFor="name">
             Name:
-            {this.context.newNote.name.touched && <p>{this.validateName()}</p>}
+            {this.state.newNote.name.touched && <p>{this.validateName()}</p>}
           </label>
           <input
             type="text"
@@ -69,12 +98,12 @@ export default class AddNote extends Component {
             aria-required="true"
             aria-label="Name"
             placeholder="Name note"
-            onChange={e => this.context.updateNewNoteData(e.target.name, e.target.value)}
+            onChange={event => this.updateNewNoteData(event.target.name, event.target.value)}
           />
 
           <label htmlFor="content">
             Description:
-            {this.context.newNote.content.touched && (
+            {this.state.newNote.content.touched && (
               <p>{this.validateContent()}</p>
             )}
           </label>
@@ -85,8 +114,8 @@ export default class AddNote extends Component {
             aria-required="true"
             aria-label="Description"
             placeholder="Write note here."
-            onChange={e => 
-              this.context.updateNewNoteData(e.target.name, e.target.value)
+            onChange={(event) => 
+              this.updateNewNoteData(event.target.name, event.target.value)
             }
           />
 

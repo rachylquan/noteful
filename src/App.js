@@ -16,25 +16,6 @@ class App extends Component {
   state = {
     notes: [],
     folders: [],
-    newFolder: {
-      hasError: false,
-      touched: false,
-      name: ''
-    },
-    newNote: {
-      name: {
-        touched: false,
-        value: ''
-      },
-      folderId: {
-        touched: false,
-        value: ''
-      },
-      content: {
-        touched: false,
-        value: '',
-      },
-    },
   };
 
 
@@ -59,31 +40,9 @@ class App extends Component {
 		});
   }
 
-  updateNewFolderName = name => {
-    this.setState({
-      newFolder: {
-        hasError: false,
-        touched: true,
-        name: name
-      }
-    })
-  }
-
-  updateNewNoteData = (input, value) => {
-    this.setState({
-      newNote: {
-        ...this.state.newNote,
-        [input]: {
-          touched: true,
-          value: value,
-        },
-      },
-    })
-  }
-
   handleAddFolder = newFolder => {
-    this.setState({
-      folders: [...this.state.folders, newFolder],
+    this.setState(prevState => {
+      return {folders: [...prevState.folders, newFolder]}
     })
   }
 
@@ -141,11 +100,7 @@ class App extends Component {
         folders: this.state.folders,
         deleteNote:this.handleDeleteNote,
         addFolder: this.handleAddFolder,
-        newFolder: this.state.newFolder,
-        updateNewFolderName: this.updateNewFolderName,
-        newNote: this.state.newNote,
         handleAddNote: this.handleAddNote,
-        updateNewNoteData: this.updateNewNoteData
       }
 
       return (

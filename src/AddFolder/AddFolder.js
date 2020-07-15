@@ -5,6 +5,14 @@ import NotefulContext from '../NotefulContext';
 import PropTypes from 'prop-types';
 
 export default class AddFolder extends Component {
+  state = {
+    newFolder: {
+      hasError: false,
+      touched: false,
+      name: ''
+    },
+  }
+
   static contextType = NotefulContext;
 
   addFolder = (name) => {
@@ -26,15 +34,21 @@ export default class AddFolder extends Component {
     this.props.history.goBack();
   }
 
-  updateFolderName(e) {
-    const newName = e.target.value;
-    this.context.updateNewFolderName(newName);
+  updateNewFolderName = event => {
+    const newName = event.target.value;
+    this.setState({
+      newFolder: {
+        hasError: false,
+        touched: true,
+        name: newName
+      }
+    })
   }
 
   validateFolderName() {
-    if (this.context.newFolder.name.trim() === 0) {
+    if (this.state.newFolder.name.trim() === 0) {
       return 'Name is required'
-    } else if ( this.context.newFolder.name.trim().length < 3 ) {
+    } else if ( this.state.newFolder.name.trim().length < 3 ) {
       return 'Name must be 3 characters long'
     }
   }
@@ -46,7 +60,7 @@ export default class AddFolder extends Component {
         <form className="AddFolder__form" onSubmit={e => this.handleSubmit(e)}>
           <label htmlFor="newFolder">
             Name:
-            {this.context.newFolder.touched && (
+            {this.state.newFolder.touched && (
               <p>{this.validateFolderName()}</p>
             )}  
           </label>
@@ -56,7 +70,7 @@ export default class AddFolder extends Component {
             id="newFolder"
             aria-required="true"
             aria-label="Name"
-            onChange= {(e) => this.updateFolderName(e)}
+            onChange= {(event) => this.updateNewFolderName(event)}
             placeholder="folder name"
           />
           <button className="submit__btn" type="submit">Add</button>
