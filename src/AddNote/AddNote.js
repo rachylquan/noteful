@@ -8,55 +8,57 @@ export default class AddNote extends Component {
     newNote: {
       name: {
         touched: false,
-        value: ''
+        value: '',
       },
       folderId: {
         touched: false,
-        value: ''
+        value: '',
       },
       content: {
         touched: false,
         value: '',
       },
     },
-  }
-  
+  };
+
   static contextType = NotefulContext;
 
-  addNewNote = note => {
+  addNewNote = (note) => {
     note.modified = new Date(note.modified);
 
-    fetch(`${config.API_Endpoint}notes`, {
+    fetch(`${config.API_Endpoint}/notes`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json', 
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(note),
     })
-    .then(res => {
-      return res.json()
-    })
-    .then(resJSON => this.context.handleAddNote(resJSON))
-  }
+      .then((res) => {
+        return res.json();
+      })
+      .then((resJSON) => this.context.handleAddNote(resJSON));
+  };
 
   parseFolders = () => {
-    return this.context.folders.map(folder => (
-     <option key={folder.id} name={folder.id} value={folder.id}>{folder.name}</option>
-    ))
-  }
+    return this.context.folders.map((folder) => (
+      <option key={folder.id} name={folder.id} value={folder.id}>
+        {folder.name}
+      </option>
+    ));
+  };
 
-  handleFormSubmit = event => {
+  handleFormSubmit = (event) => {
     event.preventDefault(event);
     const newNote = {
       name: event.target.name.value,
       content: event.target.content.value,
       folderId: event.target.folders.value,
       modified: new Date(),
-    }
+    };
     console.log(newNote);
     this.addNewNote(newNote);
     this.props.history.push('/');
-  }
+  };
 
   updateNewNoteData = (name, value) => {
     this.setState({
@@ -67,26 +69,29 @@ export default class AddNote extends Component {
           value,
         },
       },
-    })
-  }
+    });
+  };
 
   validateName = () => {
     if (this.state.newNote.name.value.length === 0) {
-      return 'Note is required'
+      return 'Note is required';
     }
-  }
+  };
 
   validateContent = () => {
     if (this.state.newNote.content.value.length === 0) {
-      return 'Description is required'
+      return 'Description is required';
     }
-  }
+  };
 
   render() {
     return (
       <>
         <h2 className="addNote__header">Add a Note</h2>
-        <form className="addNote__form" onSubmit={e => this.handleFormSubmit(e)}>
+        <form
+          className="addNote__form"
+          onSubmit={(e) => this.handleFormSubmit(e)}
+        >
           <label htmlFor="name">
             Name:
             {this.state.newNote.name.touched && <p>{this.validateName()}</p>}
@@ -98,7 +103,9 @@ export default class AddNote extends Component {
             aria-required="true"
             aria-label="Name"
             placeholder="Name note"
-            onChange={event => this.updateNewNoteData(event.target.name, event.target.value)}
+            onChange={(event) =>
+              this.updateNewNoteData(event.target.name, event.target.value)
+            }
           />
 
           <label htmlFor="content">
@@ -107,14 +114,14 @@ export default class AddNote extends Component {
               <p>{this.validateContent()}</p>
             )}
           </label>
-          <input 
+          <input
             type="text"
             name="content"
             id="content"
             aria-required="true"
             aria-label="Description"
             placeholder="Write note here."
-            onChange={(event) => 
+            onChange={(event) =>
               this.updateNewNoteData(event.target.name, event.target.value)
             }
           />
@@ -129,7 +136,9 @@ export default class AddNote extends Component {
             {this.parseFolders()}
           </select>
 
-          <button className="submit__btn" type="submit">Add</button>
+          <button className="submit__btn" type="submit">
+            Add
+          </button>
         </form>
       </>
     );

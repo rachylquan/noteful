@@ -4,15 +4,15 @@ import { countNotesForFolder } from '../notes-helpers.js';
 import './NoteListNav.css';
 import NotefulContext from '../NotefulContext.js';
 
-export default class NoteListNav extends Component{
+export default class NoteListNav extends Component {
   static contextType = NotefulContext;
 
   render() {
-    const { folders=[], notes=[] } = this.context
+    const { folders = [], notes = [] } = this.context;
     return (
       <div className="NoteListNav">
         <ul className="NoteListNav__list">
-          {folders.map(folder => 
+          {folders.map((folder) => (
             <li key={folder.id}>
               <NavLink
                 className="NoteListNav__folder-link"
@@ -24,11 +24,11 @@ export default class NoteListNav extends Component{
                 {folder.name}
               </NavLink>
             </li>
-          )}
+          ))}
         </ul>
         <div className="NoteListNav__button-wrapper">
           <button className="NoteListNav__add-folder-btn" type="button">
-            <Link to='/add-folder'>Add Folder</Link>
+            <Link to="/add-folder">Add Folder</Link>
           </button>
         </div>
       </div>

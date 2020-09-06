@@ -9,23 +9,23 @@ export default class AddFolder extends Component {
     newFolder: {
       hasError: false,
       touched: false,
-      name: ''
+      name: '',
     },
-  }
+  };
 
   static contextType = NotefulContext;
 
   addFolder = (name) => {
-    fetch(`${config.API_Endpoint}folders`, {
+    fetch(`${config.API_Endpoint}/folders`, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
       },
-      body: JSON.stringify({name})
+      body: JSON.stringify({ name }),
     })
-    .then (resp => resp.json())
-    .then(data => this.context.addFolder(data))
-  }
+      .then((resp) => resp.json())
+      .then((data) => this.context.addFolder(data));
+  };
 
   handleSubmit(event) {
     event.preventDefault();
@@ -34,22 +34,23 @@ export default class AddFolder extends Component {
     this.props.history.goBack();
   }
 
-  updateNewFolderName = event => {
+  updateNewFolderName = (event) => {
     const newName = event.target.value;
     this.setState({
       newFolder: {
         hasError: false,
         touched: true,
-        name: newName
-      }
-    })
-  }
+        name: newName,
+      },
+    });
+  };
 
   validateFolderName() {
-    if (this.state.newFolder.name.trim() === 0) {
-      return 'Name is required'
-    } else if ( this.state.newFolder.name.trim().length < 3 ) {
-      return 'Name must be 3 characters long'
+    const newFolder = this.state.newFolder.name.trim();
+    if (newFolder.length === 0) {
+      return 'Name is required';
+    } else if (newFolder.length < 3) {
+      return 'Name must be 3 characters long';
     }
   }
 
@@ -57,29 +58,32 @@ export default class AddFolder extends Component {
     return (
       <>
         <h2 className="AddFolder__header">Add Folder</h2>
-        <form className="AddFolder__form" onSubmit={e => this.handleSubmit(e)}>
+        <form
+          className="AddFolder__form"
+          onSubmit={(e) => this.handleSubmit(e)}
+        >
           <label htmlFor="newFolder">
             Name:
-            {this.state.newFolder.touched && (
-              <p>{this.validateFolderName()}</p>
-            )}  
+            {this.state.newFolder.touched && <p>{this.validateFolderName()}</p>}
           </label>
-          <input 
+          <input
             type="text"
             name="newFolder"
             id="newFolder"
             aria-required="true"
             aria-label="Name"
-            onChange= {(event) => this.updateNewFolderName(event)}
+            onChange={(event) => this.updateNewFolderName(event)}
             placeholder="folder name"
           />
-          <button className="submit__btn" type="submit">Add</button>
+          <button className="submit__btn" type="submit">
+            Add
+          </button>
         </form>
       </>
-    )
+    );
   }
 }
 
 AddFolder.propTypes = {
-  history: PropTypes.object
-}
+  history: PropTypes.object,
+};
